@@ -291,6 +291,15 @@ describe('IP library for node.js', function() {
       assert.equal(ip.isPrivate('::1'), true);
       assert.equal(ip.isPrivate('fe80::1'), true);
     });
+
+    it('CVE-2023-42282', () => {
+      assert.equal(ip.isPrivate('0x7f.1'), true);
+      assert.equal(ip.isPrivate('0x7f.0.1'), true);
+      assert.equal(ip.isPrivate('0x7f.0.0.1'), true);
+      assert.equal(ip.isPrivate('0177.1'), true);
+      assert.equal(ip.isPrivate('0177.0.1'), true);
+      assert.equal(ip.isPrivate('0177.0.0.1'), true);
+    });
   });
 
   describe('loopback() method', function() {
